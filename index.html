@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>唐婉灵 | 视觉设计师个人主页</title>
+  <style>
+    :root {
+      --ink: #2e2b32;
+      --soft-ink: #706a78;
+      --line: rgba(255, 255, 255, 0.62);
+      --panel: rgba(255, 255, 255, 0.68);
+      --panel-strong: rgba(255, 255, 255, 0.86);
+      --rose: #f5a8ba;
+      --coral: #ee7f74;
+      --mint: #8fcbb9;
+      --sky: #98b9df;
+      --butter: #f4d984;
+      --shadow: 0 22px 60px rgba(93, 78, 102, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 7%, rgba(245, 168, 186, 0.40), transparent 28%),
+        radial-gradient(circle at 90% 9%, rgba(143, 203, 185, 0.38), transparent 26%),
+        radial-gradient(circle at 72% 82%, rgba(152, 185, 223, 0.34), transparent 30%),
+        linear-gradient(135deg, #fff6f7 0%, #f6fbf8 42%, #f8f4ff 100%);
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 70%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 42px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.54);
+      box-shadow: 0 12px 36px rgba(93, 78, 102, 0.10);
+      backdrop-filter: blur(22px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--rose), var(--mint));
+      color: white;
+      box-shadow: 0 10px 22px rgba(238, 127, 116, 0.20);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--ink);
+    }
+
+    .hero {
+      min-height: calc(100vh - 92px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      align-items: center;
+      gap: 34px;
+      padding: 48px 0 38px;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 999px;
+      color: #7b6570;
+      background: rgba(255, 255, 255, 0.58);
+      box-shadow: 0 12px 30px rgba(93, 78, 102, 0.08);
+      backdrop-filter: blur(18px);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 16px 0 0 var(--butter), 32px 0 0 var(--mint);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(44px, 8vw, 92px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .name-line {
+      display: block;
+      margin-top: 10px;
+      color: #4d3c48;
+      font-size: clamp(34px, 6vw, 68px);
+      font-weight: 500;
+    }
+
+    .lead {
+      max-width: 660px;
+      margin: 0;
+      color: var(--soft-ink);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 11px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.64);
+      box-shadow: 0 14px 28px rgba(93, 78, 102, 0.11);
+      color: #504957;
+      font-weight: 700;
+      backdrop-filter: blur(18px);
+    }
+
+    .button.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, #ef8891, #8fcbb9);
+      color: white;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      align-items: center;
+    }
+
+    .portrait-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.40);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .portrait-card img {
+      display: block;
+      width: 100%;
+      height: min(68vh, 620px);
+      object-fit: cover;
+      object-position: 50% 45%;
+      border-radius: 34px;
+      filter: saturate(0.92) contrast(1.02);
+    }
+
+    .float-note {
+      position: absolute;
+      right: -10px;
+      bottom: 38px;
+      width: min(250px, 60%);
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 38px rgba(93, 78, 102, 0.14);
+      backdrop-filter: blur(20px);
+    }
+
+    .float-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 22px;
+    }
+
+    .float-note span {
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--panel);
+      box-shadow: 0 18px 48px rgba(93, 78, 102, 0.09);
+      backdrop-filter: blur(20px);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.2;
+    }
+
+    .section-label {
+      color: var(--soft-ink);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .intro-card,
+    .info-card,
+    .mini-card,
+    .timeline-item,
+    .award-list,
+    .skill-cloud {
+      border: 1px solid rgba(255, 255, 255, 0.70);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.50);
+    }
+
+    .intro-card {
+      padding: 24px;
+    }
+
+    .intro-card p {
+      margin: 0;
+      color: var(--soft-ink);
+      font-size: 17px;
+    }
+
+    .info-card {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 42px;
+      padding: 10px 13px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .info-row span:first-child {
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    .info-row strong {
+      text-align: right;
+      font-size: 15px;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .mini-card {
+      padding: 22px;
+    }
+
+    .mini-card small {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(244, 217, 132, 0.36);
+      color: #765f1e;
+      font-weight: 700;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--soft-ink);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .time {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      color: var(--soft-ink);
+      font-weight: 700;
+    }
+
+    .time::before {
+      content: "";
+      width: 46px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--rose), var(--mint));
+    }
+
+    .role h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+    }
+
+    .role .job {
+      display: block;
+      margin-bottom: 10px;
+      color: #7f6373;
+      font-weight: 700;
+    }
+
+    .role ul,
+    .award-list ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--soft-ink);
+    }
+
+    .role li + li,
+    .award-list li + li {
+      margin-top: 6px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .award-list,
+    .skill-cloud {
+      padding: 22px;
+    }
+
+    .skill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.66);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.54);
+      color: #5f5362;
+      font-weight: 700;
+    }
+
+    .contact-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .contact-item {
+      min-height: 104px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      background: var(--panel-strong);
+    }
+
+    .contact-item span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    .contact-item strong {
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 28px 0 10px;
+      text-align: center;
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .page {
+        width: min(100% - 24px, 680px);
+        padding-top: 16px;
+      }
+
+      .nav {
+        position: static;
+        align-items: flex-start;
+        border-radius: 22px;
+      }
+
+      .nav-links {
+        max-width: 260px;
+      }
+
+      .hero,
+      .about-grid,
+      .education-grid,
+      .two-column,
+      .contact-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 36px 0 18px;
+      }
+
+      .portrait-wrap {
+        min-height: auto;
+      }
+
+      .portrait-card img {
+        height: 520px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav {
+        display: grid;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      .section {
+        padding: 22px 16px;
+        border-radius: 24px;
+      }
+
+      .section-head {
+        display: grid;
+        gap: 6px;
+      }
+
+      .portrait-card,
+      .portrait-card img {
+        border-radius: 26px;
+      }
+
+      .portrait-card img {
+        height: 440px;
+      }
+
+      .float-note {
+        position: static;
+        width: auto;
+        margin-top: -22px;
+        margin-inline: 16px;
+      }
+
+      .info-row {
+        display: grid;
+        gap: 2px;
+      }
+
+      .info-row strong {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="页面导航">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark">T</span>
+        <span>唐婉灵 · Portfolio</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#education">教育</a>
+        <a href="#experience">经历</a>
+        <a href="#awards">能力</a>
+        <a href="#contact">联系</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span>视觉传达 · 包装设计 · 数字界面</span>
+        <h1>
+          Hello.
+          <span class="name-line">我是唐婉灵</span>
+        </h1>
+        <p class="lead">
+          一名正在工业设计工程方向继续深造的视觉设计师。喜欢把清晰的信息层级、
+          温柔的视觉语言和克制的可爱感放进设计里，让作品既有情绪，也经得起使用。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#experience">查看经历</a>
+          <a class="button" href="#contact">联系我</a>
+        </div>
+      </div>
+
+      <div class="portrait-wrap" aria-label="个人照片">
+        <figure class="portrait-card">
+          <img src="assets/profile.jpg" alt="唐婉灵个人照片">
+        </figure>
+        <div class="float-note">
+          <strong>Visual Designer</strong>
+          <span>轻甜、精致、柔软，但始终保持清晰表达。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-head">
+        <h2>关于我</h2>
+        <span class="section-label">About Me</span>
+      </div>
+      <div class="about-grid">
+        <div class="intro-card">
+          <p>
+            我关注品牌视觉、包装设计、广告平面与小程序视觉内容的呈现。过往实习中，
+            我参与礼品包装、宣传物料、公众号排版与项目效果图制作，能够根据品牌调性
+            与市场需求完成清晰、细腻、可落地的视觉表达。
+          </p>
+        </div>
+        <div class="info-card">
+          <div class="info-row"><span>年龄</span><strong>24岁</strong></div>
+          <div class="info-row"><span>学历</span><strong>硕士研究生</strong></div>
+          <div class="info-row"><span>电话</span><strong>155-7848-2005</strong></div>
+          <div class="info-row"><span>邮箱</span><strong>503905027@qq.com</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-head">
+        <h2>教育经历</h2>
+        <span class="section-label">Education</span>
+      </div>
+      <div class="education-grid">
+        <article class="mini-card">
+          <small>2021 - 2025</small>
+          <h3>广西艺术学院（本科）</h3>
+          <p>视觉传达设计 · 班级班长</p>
+        </article>
+        <article class="mini-card">
+          <small>2025 - 2028</small>
+          <h3>广东工业大学（硕士）</h3>
+          <p>工业设计工程</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head">
+        <h2>工作履历</h2>
+        <span class="section-label">Work Experience</span>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="time">2025.04 - 至今</div>
+          <div class="role">
+            <h3>广西禧礼贸易有限公司</h3>
+            <span class="job">礼品包装设计师</span>
+            <ul>
+              <li>负责公司礼品的平面包装设计，确保视觉符合品牌风格和市场需求。</li>
+              <li>协助完成小程序相关图片设计，包括商品展示与宣传图。</li>
+              <li>根据项目需求制作作品效果图，为客户提供直观展示。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="time">2025.02 - 2025.04</div>
+          <div class="role">
+            <h3>广西创易文化传播有限公司</h3>
+            <span class="job">平面设计师</span>
+            <ul>
+              <li>负责公众号排版、广告平面设计与日常图文处理，严格把控视觉效果和排版规范。</li>
+              <li>协助总监完成设计及美学相关工作，配合推进设计任务落地。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="time">2023.07 - 2023.09</div>
+          <div class="role">
+            <h3>广西铁路文旅集团有限公司</h3>
+            <span class="job">设计师</span>
+            <ul>
+              <li>负责广告平面设计、图文处理与企业宣传资料的设计制作。</li>
+              <li>协助各部门完成设计及美学相关工作。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="time">2022.12 - 2023.02</div>
+          <div class="role">
+            <h3>广西桂报传媒有限公司</h3>
+            <span class="job">广告采编设计</span>
+            <ul>
+              <li>负责企业宣传资料设计、制作与创新优化，完成活动海报的设计与落地执行。</li>
+              <li>负责广告平面设计及图文处理，对图片、文案等素材进行优化排版。</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="awards">
+      <div class="section-head">
+        <h2>获奖与专业技能</h2>
+        <span class="section-label">Awards & Skills</span>
+      </div>
+      <div class="two-column">
+        <div class="award-list">
+          <ul>
+            <li>作品《铁道初心》LOGO设计被全国铁道团委征用</li>
+            <li>中国国际“互联网+”大学生创新创业大赛国家级立项</li>
+            <li>第14届全国大学生广告艺术大赛三等奖</li>
+            <li>中国大学生广告艺术节学院奖2023春季征集大赛优秀奖</li>
+            <li>第十一届未来设计师全国高校数字艺术设计大赛三等奖</li>
+            <li>中国包装创意设计大赛三等奖</li>
+          </ul>
+        </div>
+        <div class="skill-cloud" aria-label="专业技能">
+          <span class="pill">Illustrator</span>
+          <span class="pill">Photoshop</span>
+          <span class="pill">Figma</span>
+          <span class="pill">After Effects</span>
+          <span class="pill">CAD</span>
+          <span class="pill">CorelDRAW</span>
+          <span class="pill">Cinema 4D</span>
+          <span class="pill">包装设计</span>
+          <span class="pill">品牌视觉</span>
+          <span class="pill">排版设计</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-head">
+        <h2>联系方式</h2>
+        <span class="section-label">Contact</span>
+      </div>
+      <div class="contact-strip">
+        <div class="contact-item">
+          <span>电话</span>
+          <strong>155-7848-2005</strong>
+        </div>
+        <div class="contact-item">
+          <span>邮箱</span>
+          <strong>503905027@qq.com</strong>
+        </div>
+        <div class="contact-item">
+          <span>方向</span>
+          <strong>视觉设计 / 包装设计 / UI设计</strong>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 唐婉灵的个人网页 · Designed with soft glass UI.</p>
+    </footer>
+  </main>
+</body>
+</html>
